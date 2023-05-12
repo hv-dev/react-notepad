@@ -1,13 +1,13 @@
-import headerImg from './assets/images/header.png';
-import './App.css';
+// import './App.css';
 import {Header} from "./components"
+import headerImg from './assets/images/logo.svg';
 
 function App() {
   return (
     <div>
       <Header 
-        leftText="Your Personal Notepad"
-        rightText="Your Personal Notepad - built in React!"
+        titleText="Your Personal Notepad"
+        link={{ url: "https://www.github.com/hv-dev", text: "Other Projects" }}
         imgSrc={headerImg}
       />
     </div>
