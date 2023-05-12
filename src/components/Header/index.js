@@ -4,6 +4,4 @@ so it can be picked up by this repos top level index.js
 */
 import Header from "./Header"
 
-export {
-  Header
-};
+export default Header
