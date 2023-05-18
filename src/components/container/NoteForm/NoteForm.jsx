@@ -58,7 +58,8 @@ const Form = styled.form`
   background-color: red;
   display: flex;
   flex-direction: column;
-  padding: 2%;
+  padding 24px;
+  margin-right: 24px;
   width: 400px;
 
   .form--input {
