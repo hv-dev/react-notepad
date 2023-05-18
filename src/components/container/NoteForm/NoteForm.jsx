@@ -6,7 +6,6 @@ function NoteForm() {
     title: "",
     note: "",
     created_by: "",
-
   })
 
   function updateNewNote(event) {
@@ -17,8 +16,12 @@ function NoteForm() {
     }))
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  }
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <h2>New Note</h2>
       <input 
         type="text"
@@ -28,25 +31,34 @@ function NoteForm() {
         name="title"
         onChange={updateNewNote}
       />
+      <input 
+        type="text"
+        placeholder="Noted by"
+        className="form--input"
+        value={newNote.created_by}
+        name="created_by"
+        onChange={updateNewNote}
+      />
       <textarea
         placeholder="Note"
         className="form--input"
         value={newNote.note}
         name="note"
         onChange={updateNewNote}
+        rows={15}
       />
-      <SubmitButton>Add To Notes</SubmitButton>
+      <SubmitButton >Add To Notes</SubmitButton>
     </Form>
   )
 }
 
 export default NoteForm
 
-const Form = styled.div`
+const Form = styled.form`
   background-color: red;
   display: flex;
   flex-direction: column;
-  padding: 5%;
+  padding: 2%;
   width: 400px;
 
   .form--input {
@@ -58,11 +70,9 @@ const Form = styled.div`
     border-radius: 4px;
     box-sizing: border-box;
   }
-
-  input[type=textarea] {
-    rows: 10;
-  }
 `
 const SubmitButton = styled.button`
-  background-color: blue;
+  height: 48px;
+  margin-top: 12px;
+  border-radius: 16px;
 `
