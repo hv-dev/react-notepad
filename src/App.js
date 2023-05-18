@@ -1,5 +1,5 @@
 // import './App.css';
-import {Header} from "./components"
+import {Header, NoteForm} from "./components"
 import headerImg from './assets/images/logo.svg';
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
         link={{ url: "https://www.github.com/hv-dev", text: "Other Projects" }}
         imgSrc={headerImg}
       />
+      <NoteForm />
     </div>
   );
 }
