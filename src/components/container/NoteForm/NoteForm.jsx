@@ -1,24 +1,9 @@
 import React from "react"
 import styled from "styled-components"
 
-function NoteForm() {
-  const [newNote, setNewNote] = React.useState({
-    title: "",
-    note: "",
-    created_by: "",
-  })
+function NoteForm(props) {
+  const { title, created_by, note, updateNewNote, handleSubmit} = props
 
-  function updateNewNote(event) {
-    const { name, value } = event.target
-    setNewNote(prev => ({
-      prev,
-      [name]: value
-    }))
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -27,7 +12,7 @@ function NoteForm() {
         type="text"
         placeholder="Title"
         className="form--input"
-        value={newNote.title}
+        value={title}
         name="title"
         onChange={updateNewNote}
       />
@@ -35,14 +20,14 @@ function NoteForm() {
         type="text"
         placeholder="Noted by"
         className="form--input"
-        value={newNote.created_by}
+        value={created_by}
         name="created_by"
         onChange={updateNewNote}
       />
       <textarea
         placeholder="Note"
         className="form--input"
-        value={newNote.note}
+        value={note}
         name="note"
         onChange={updateNewNote}
         rows={15}
@@ -58,9 +43,7 @@ const Form = styled.form`
   background-color: red;
   display: flex;
   flex-direction: column;
-  padding 24px;
-  margin-right: 24px;
-  width: 400px;
+  padding 18px 48px;
 
   .form--input {
     width: 100%;

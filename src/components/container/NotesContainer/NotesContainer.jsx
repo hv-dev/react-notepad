@@ -53,6 +53,24 @@ function NotesContainer() {
       setNotes(notes => ([...notes, {...newNote, key: (notes.length + 1) }]))
     }
 
+    const [newNote, setNewNote] = React.useState({
+      title: "",
+      note: "",
+      created_by: "",
+    })
+
+    function updateNewNote(event) {
+      const { name, value } = event.target
+      setNewNote(prev => ({
+        prev,
+        [name]: value
+      }))
+    }
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+    }
+
     const noteComponents = notes.map(noteData => (<Note {...noteData} />))
 
     return (
