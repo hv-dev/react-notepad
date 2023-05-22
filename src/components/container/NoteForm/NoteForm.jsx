@@ -4,7 +4,6 @@ import styled from "styled-components"
 function NoteForm(props) {
   const { title, created_by, note, updateNewNote, handleSubmit} = props
 
-
   return (
     <Form onSubmit={handleSubmit}>
       <h2>New Note</h2>

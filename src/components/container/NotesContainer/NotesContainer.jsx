@@ -17,34 +17,6 @@ function NotesContainer() {
           created_by: "Developer",
           created_at: "Thu 18 May",
           note: "test note to allow for design of note displaying"
-        },
-        {
-          key: 3,
-          title: "Title",
-          created_by: "Developer",
-          created_at: "Thu 18 May",
-          note: "test note to allow for design of note displaying"
-        },
-        {
-          key: 4,
-          title: "Title",
-          created_by: "Developer",
-          created_at: "Thu 18 May",
-          note: "test note to allow for design of note displaying"
-        },
-        {
-          key: 5,
-          title: "Title",
-          created_by: "Developer",
-          created_at: "Thu 18 May",
-          note: "test note to allow for design of note displaying"
-        },
-        {
-          key: 6,
-          title: "Title",
-          created_by: "Developer",
-          created_at: "Thu 18 May",
-          note: "test note to allow for design of note displaying"
         }
     ])
 
@@ -67,15 +39,32 @@ function NotesContainer() {
       }))
     }
 
-    const handleSubmit = (event) => {
+    function clearNewNote() {
+      setNewNote({
+        title: "",
+        note: "",
+        created_by: "",
+      })
+    }
+
+    function handleSubmit(event) {
       event.preventDefault();
+      updateNotes(newNote);
+      clearNewNote();
     }
 
     const noteComponents = notes.map(noteData => (<Note {...noteData} />))
 
     return (
         <Container>
-            <NoteForm />
+            <NoteForm
+              title={newNote.title}
+              created_by={newNote.created_by}
+              note={newNote.note}
+              updateNewNote={updateNewNote}
+              // clearNewNote={clearNewNote}
+              handleSubmit={handleSubmit}
+            />
             { notes.length > 0 ? noteComponents : <h1>No Items to Display</h1>}
         </Container>
     )
