@@ -2,7 +2,8 @@ import React from "react"
 import styled from "styled-components"
 import { NoteForm, Note } from "../../"
 
-function NotesContainer() {
+function NotesContainer(props) {
+    const { showForm } = props
     const[notes, setNotes] = React.useState([])
 
     function updateNotes(newNote) {
@@ -37,18 +38,28 @@ function NotesContainer() {
       });
     }
 
+    const noteForm = <NoteForm
+                        title={newNote.title}
+                        created_by={newNote.created_by}
+                        created_at={newNote.created_at}
+                        note={newNote.note}
+                        updateNewNote={updateNewNote}
+                        handleSubmit={handleSubmit}
+                      />
     const noteComponents = notes.map(noteData => (<Note {...noteData} />))
 
     return (
         <Container>
-            <NoteForm
-              title={newNote.title}
-              created_by={newNote.created_by}
-              created_at={newNote.created_at}
-              note={newNote.note}
-              updateNewNote={updateNewNote}
-              handleSubmit={handleSubmit}
-            />
+            { showForm && 
+                <NoteForm
+                  title={newNote.title}
+                  created_by={newNote.created_by}
+                  created_at={newNote.created_at}
+                  note={newNote.note}
+                  updateNewNote={updateNewNote}
+                  handleSubmit={handleSubmit}
+                />
+            }
             { notes.length > 0 ? noteComponents : <h1>No Items to Display</h1>}
         </Container>
     )

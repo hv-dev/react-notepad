@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 function NoteForm(props) {
-  const { title, created_by, created_at, note, updateNewNote, handleSubmit} = props
+  const { title, created_by, note, updateNewNote, handleSubmit} = props
 
   return (
     <Form onSubmit={handleSubmit}>
