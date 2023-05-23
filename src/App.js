@@ -19,7 +19,7 @@ function App() {
         formToggle={toggleNoteForm}
       />
       <NotesContainer
-        showForm={true}
+        showForm={showForm}
       />
     </div>
   );
