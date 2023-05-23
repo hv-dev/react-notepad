@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 function NoteForm(props) {
-  const { title, created_by, note, updateNewNote, handleSubmit} = props
+  const { title, created_by, created_at, note, updateNewNote, handleSubmit} = props
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -14,6 +14,7 @@ function NoteForm(props) {
         value={title}
         name="title"
         onChange={updateNewNote}
+        required
       />
       <input 
         type="text"
@@ -22,6 +23,7 @@ function NoteForm(props) {
         value={created_by}
         name="created_by"
         onChange={updateNewNote}
+        required
       />
       <textarea
         placeholder="Note"
@@ -30,6 +32,7 @@ function NoteForm(props) {
         name="note"
         onChange={updateNewNote}
         rows={15}
+        required
       />
       <SubmitButton >Add To Notes</SubmitButton>
     </Form>
