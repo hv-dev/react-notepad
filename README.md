@@ -30,12 +30,12 @@ Please see a **very basic** example here: [https://damonspencerroberts.github.io
 
 ### **MVP Requirements**
 
-1. User can type their name, the date and their note inside a form and be able to submit the form.
-2. Validation will verify that no fields are empty and only submit the form if all fields are filled.
-3. The user should have a button that allows them to add a new note that will display the form.
-4. User can close the form by clicking on an exit button.
+1. User can type their name, the date and their note inside a form and be able to submit the form. ✅
+2. Validation will verify that no fields are empty and only submit the form if all fields are filled. ✅
+3. The user should have a button that allows them to add a new note that will display the form. ✅
+4. User can close the form by clicking on an exit button. ✅ (Form is shown via a toggle button in Header)
 5. Notes should be displayed with a nice list of note cards.
-6. If there are no notes display ‘No notes yet’ message to the user.
+6. If there are no notes display ‘No notes yet’ message to the user. ✅
 7. There should be a way to sort the notes by date associated with the note.
 8. There should be a way to update a specific note.
 9. There should be a way to delete a specific note.
