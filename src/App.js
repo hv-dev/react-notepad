@@ -17,6 +17,7 @@ function App() {
         link={{ url: "https://www.github.com/hv-dev", text: "Other Projects" }}
         imgSrc={headerImg}
         formToggle={toggleNoteForm}
+        showForm={showForm}
       />
       <NotesContainer
         showForm={showForm}
