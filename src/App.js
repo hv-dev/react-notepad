@@ -1,7 +1,8 @@
 // import './App.css';
 import { useState } from "react"
 import {Header, NotesContainer} from "./components"
-import headerImg from './assets/images/logo.svg';
+import styled from "styled-components"
+import headerImg from './assets/images/maxwell-the-cat-maxwell.gif';
 
 function App() {
   const [showForm, toggleForm] = useState(true);
@@ -11,7 +12,7 @@ function App() {
   }
 
   return (
-    <div>
+    <AppContainer>
       <Header 
         titleText="Your Personal Notepad"
         link={{ url: "https://www.github.com/hv-dev", text: "Other Projects" }}
@@ -22,8 +23,12 @@ function App() {
       <NotesContainer
         showForm={showForm}
       />
-    </div>
+    </AppContainer>
   );
 }
 
 export default App;
+
+const AppContainer = styled.div`
+  height: 100%;
+`
