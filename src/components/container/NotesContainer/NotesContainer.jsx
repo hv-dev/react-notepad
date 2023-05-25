@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { NoteForm, Note } from "../../"
+import backgroundImg from "../../../assets/images/background.svg"
 
 function NotesContainer(props) {
     const { showForm } = props
@@ -56,6 +57,9 @@ function NotesContainer(props) {
 
     return (
         <Container>
+          <BackgroundImage 
+            src={backgroundImg}
+          />
             { showForm && 
                 <NoteForm
                   title={newNote.title}
@@ -66,7 +70,7 @@ function NotesContainer(props) {
                   handleSubmit={handleSubmit}
                 />
             }
-            { notes.length > 0 ? noteComponents : <h1>No Items to Display</h1>}
+            { notes.length > 0 ? noteComponents : <NoNotesMessage>No Notes to Display</NoNotesMessage>}
         </Container>
     )
 }
@@ -74,7 +78,19 @@ function NotesContainer(props) {
 export default NotesContainer
 
 const Container = styled.main`
-  background-color: purple;
-  display: flex;
-  flex-direction: column;
+  height: 100%;
+`
+
+const BackgroundImage = styled.img`
+  // puts it behind all other elements
+  position: absolute;
+  z-index: -999;
+
+  // extends it to all edges of page
+  width: 100%;
+  height: 100%;
+`
+
+const NoNotesMessage = styled.h1`
+  align-self: center;
 `
