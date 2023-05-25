@@ -12,6 +12,14 @@ function NotesContainer(props) {
       setNotes(notes => ([...notes, {...newNote, key: (notes.length + 1), created_at: dateString }]))
     }
 
+    function deleteSelectedNote(key) {
+      setNotes(current =>
+        current.filter(note => {
+          return note.key !== key;
+        })
+      );
+    }
+
     const [newNote, setNewNote] = React.useState({
       title: "",
       note: "",
@@ -28,7 +36,6 @@ function NotesContainer(props) {
 
     function handleSubmit(event) {
       event.preventDefault();
-      console.log(newNote);
       updateNotes(newNote);
 
       setNewNote({
@@ -41,12 +48,11 @@ function NotesContainer(props) {
     const noteForm = <NoteForm
                         title={newNote.title}
                         created_by={newNote.created_by}
-                        created_at={newNote.created_at}
                         note={newNote.note}
                         updateNewNote={updateNewNote}
                         handleSubmit={handleSubmit}
                       />
-    const noteComponents = notes.map(noteData => (<Note {...noteData} />))
+    const noteComponents = notes.map(noteData => (<Note {...noteData} deleteNote={deleteSelectedNote} id={noteData.key} />))
 
     return (
         <Container>
