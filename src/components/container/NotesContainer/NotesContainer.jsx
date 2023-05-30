@@ -46,13 +46,6 @@ function NotesContainer(props) {
       });
     }
 
-    const noteForm = <NoteForm
-                        title={newNote.title}
-                        created_by={newNote.created_by}
-                        note={newNote.note}
-                        updateNewNote={updateNewNote}
-                        handleSubmit={handleSubmit}
-                      />
     const noteComponents = notes.map(noteData => (<Note {...noteData} deleteNote={deleteSelectedNote} id={noteData.key} />))
 
     return (
@@ -60,17 +53,17 @@ function NotesContainer(props) {
           <BackgroundImage 
             src={backgroundImg}
           />
-            { showForm && 
-                <NoteForm
-                  title={newNote.title}
-                  created_by={newNote.created_by}
-                  created_at={newNote.created_at}
-                  note={newNote.note}
-                  updateNewNote={updateNewNote}
-                  handleSubmit={handleSubmit}
-                />
-            }
-            { notes.length > 0 ? noteComponents : <NoNotesMessage>No Notes to Display</NoNotesMessage>}
+          { showForm && 
+            <NoteForm
+              title={newNote.title}
+              created_by={newNote.created_by}
+              created_at={newNote.created_at}
+              note={newNote.note}
+              updateNewNote={updateNewNote}
+              handleSubmit={handleSubmit}
+            />
+          }
+          { notes.length > 0 ? noteComponents : <NoNotesMessage>No Notes to Display</NoNotesMessage>}
         </Container>
     )
 }

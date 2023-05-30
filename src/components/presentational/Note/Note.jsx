@@ -1,11 +1,12 @@
 import React from "react"
 import styled from "styled-components"
+import PropTypes from 'prop-types';
 
 function NotesContainer(props) {
-    const { id, title, note, created_by, created_at, deleteNote } = props
+    const { id, title, note, created_by, created_at, deleteNote, color } = props
 
     return (
-        <Note>
+        <Note color={color}>
             <NoteTitle>{title}</NoteTitle>
             <DeleteButton onClick={() => deleteNote(id)}>Delete</DeleteButton>
             <NoteDetails>Author: {created_by} on {created_at}</NoteDetails>
@@ -17,7 +18,6 @@ function NotesContainer(props) {
 export default NotesContainer
 
 const Note = styled.div`
-    background-color: white;
     margin: 20px 20px;
 `
 
@@ -40,3 +40,17 @@ const NoteDetails = styled.h2`
 const NoteText = styled.p`
     margin-left: 10px;
 `
+
+Note.propTypes = {
+    id: PropTypes.number,
+    title: PropTypes.string.isRequired,
+    note: PropTypes.string.isRequired,
+    created_by: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired,
+    deleteNote: PropTypes.func.isRequired,
+    color: PropTypes.string
+}
+
+Note.defaultProps = {
+    color: null
+};
