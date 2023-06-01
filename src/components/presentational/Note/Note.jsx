@@ -2,13 +2,14 @@ import React from "react"
 import styled from "styled-components"
 
 function NotesContainer(props) {
-    const { title, note, created_by, created_at } = props
+    const { id, title, note, created_by, created_at, deleteNote } = props
 
     return (
         <Note>
             <NoteTitle>{title}</NoteTitle>
             <NoteDetails>Author: {created_by} on {created_at}</NoteDetails>
             <NoteText>{note}</NoteText>
+            <button onClick={() => deleteNote(id)}></button>
         </Note>
     )
 }

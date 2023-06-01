@@ -2,14 +2,14 @@ import React from "react"
 import styled from "styled-components"
 
 function Header(props) {
-  const {titleText, link, imgSrc, imgAlt} = props
+  const {titleText, link, imgSrc, imgAlt, formToggle, showForm} = props
 
   return (
     <StyledHeader>
       <img src={imgSrc} alt={imgAlt} />
       <Title>{titleText}</Title>
+      <FormToggle onClick={formToggle}>{showForm ? "Hide Form" : "Show Form"}</FormToggle>
       <Link href={link.url}>{link.text}</Link>
-      
     </StyledHeader>
   )
 }
@@ -27,12 +27,18 @@ const StyledHeader = styled.div`
   }
 `
 const Title = styled.h2`
-  margin-right: auto;
+  margin-right: 12px;
   color: #61DAFB;
   font-weight: 700;
   font-size: 26px;
 `
+
+const FormToggle = styled.h3`
+  color: red;
+`
+
 const Link = styled.a`
+  margin-left: auto;
   text-decoration: none;
   color: #61DAFB;
 `
