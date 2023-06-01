@@ -46,7 +46,7 @@ function NotesContainer(props) {
       });
     }
 
-    const noteComponents = notes.map(noteData => (<Note {...noteData} deleteNote={deleteSelectedNote} id={noteData.key} />))
+    const noteComponents = notes.map(noteData => (<Note {...noteData} deleteNote={deleteSelectedNote} id={noteData.key} color={null} />))
 
     return (
         <Container>

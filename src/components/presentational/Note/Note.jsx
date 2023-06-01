@@ -1,24 +1,20 @@
 import React from "react"
 import styled from "styled-components"
 import PropTypes from 'prop-types';
-import greenNote from "../../../assets/images/notes/green.png"
-import orangeNote from "../../../assets/images/notes/orange.png"
-import pinkNote from "../../../assets/images/notes/pink.png"
-import purpleNote from "../../../assets/images/notes/purple.png"
 
 function Note(props) {
     const { id, title, note, created_by, created_at, deleteNote, color } = props
 
     const colorArr = [
-        { name: "green", img: {greenNote}},
-        { name: "orange", img: {orangeNote}},
-        { name: "pink", img: {pinkNote}},
-        { name: "purple", img: {purpleNote}}
+        { name: "green", code: "RGB(202,237,157)"},
+        { name: "orange", code: "RGB(248,163,43)"},
+        { name: "pink", code: "RGB(252,195,201)"},
+        { name: "purple", code: "RGB(220,136,221)"}
     ]
 
     const noteColor = color === null
-        ? colorArr[Math.floor(Math.random() * colorArr.length)].img
-        : colorArr.find(obj => obj.name === color)
+        ? colorArr[Math.floor(Math.random() * colorArr.length)].code
+        : colorArr.find(obj => obj.name === color).code
 
     return (
         <NoteMain color={noteColor}>
@@ -33,8 +29,7 @@ function Note(props) {
 export default Note
 
 const NoteMain = styled.div`
-    background: ${(props) => `url(${greenNote}) no-repeat`};
-    background-size: auto;
+    background: ${(props) => props.color};
     margin: 20px 20px;
 `
 
