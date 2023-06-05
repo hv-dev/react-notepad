@@ -24,7 +24,8 @@ function NotesContainer(props) {
     const [newNote, setNewNote] = React.useState({
       title: "",
       note: "",
-      created_by: ""
+      created_by: "",
+      color: "random"
     })
 
     function updateNewNote(event) {
@@ -35,18 +36,37 @@ function NotesContainer(props) {
       }))
     }
 
+    const colorArr = [
+      { name: "green", code: "RGB(202,237,157)"},
+      { name: "orange", code: "RGB(248,163,43)"},
+      { name: "pink", code: "RGB(252,195,201)"},
+      { name: "purple", code: "RGB(220,136,221)"}
+    ]
+
     function handleSubmit(event) {
       event.preventDefault();
-      updateNotes(newNote);
+      const note = newNote;
+      note.color = newNote.color === "random"
+                    ? colorArr[Math.floor(Math.random() * 4)].code
+                    : colorArr.find(obj => obj.name === newNote.color).code
+
+      updateNotes(note);
 
       setNewNote({
         title: "",
         note: "",
         created_by: "",
+        color: "random"
       });
     }
 
-    const noteComponents = notes.map(noteData => (<Note {...noteData} deleteNote={deleteSelectedNote} id={noteData.key} color={null} />))
+    const noteComponents = notes.map(noteData => (
+      <Note
+        {...noteData}
+        deleteNote={deleteSelectedNote}
+        id={noteData.key}
+      />
+    ))
 
     return (
         <Container>

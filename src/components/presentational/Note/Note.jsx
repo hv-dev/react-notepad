@@ -5,19 +5,19 @@ import PropTypes from 'prop-types';
 function Note(props) {
     const { id, title, note, created_by, created_at, deleteNote, color } = props
 
-    const colorArr = [
-        { name: "green", code: "RGB(202,237,157)"},
-        { name: "orange", code: "RGB(248,163,43)"},
-        { name: "pink", code: "RGB(252,195,201)"},
-        { name: "purple", code: "RGB(220,136,221)"}
-    ]
+    // const colorArr = [
+    //     { name: "green", code: "RGB(202,237,157)"},
+    //     { name: "orange", code: "RGB(248,163,43)"},
+    //     { name: "pink", code: "RGB(252,195,201)"},
+    //     { name: "purple", code: "RGB(220,136,221)"}
+    // ]
 
-    const noteColor = color === null
-        ? colorArr[Math.floor(Math.random() * colorArr.length)].code
-        : colorArr.find(obj => obj.name === color).code
+    // const noteColor = color === null
+    //     ? colorArr[Math.floor(Math.random() * colorArr.length)].code
+    //     : colorArr.find(obj => obj.name === color).code
 
     return (
-        <NoteMain color={noteColor}>
+        <NoteMain color={color}>
             <NoteTitle>{title}</NoteTitle>
             <DeleteButton onClick={() => deleteNote(id)}>Delete</DeleteButton>
             <NoteDetails>Author: {created_by} on {created_at}</NoteDetails>
