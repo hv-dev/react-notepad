@@ -35,6 +35,9 @@ const Title = styled.h2`
 
 const FormToggle = styled.h3`
   color: red;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: white;
 `
 
 const Link = styled.a`

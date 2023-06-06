@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { NoteForm, Note } from "../../"
+import backgroundImg from "../../../assets/images/background.svg"
 
 function NotesContainer(props) {
     const { showForm } = props
@@ -23,7 +24,8 @@ function NotesContainer(props) {
     const [newNote, setNewNote] = React.useState({
       title: "",
       note: "",
-      created_by: ""
+      created_by: "",
+      color: "random"
     })
 
     function updateNewNote(event) {
@@ -34,39 +36,54 @@ function NotesContainer(props) {
       }))
     }
 
+    const colorArr = [
+      { name: "green", code: "RGB(202,237,157)"},
+      { name: "orange", code: "RGB(248,163,43)"},
+      { name: "pink", code: "RGB(252,195,201)"},
+      { name: "purple", code: "RGB(220,136,221)"}
+    ]
+
     function handleSubmit(event) {
       event.preventDefault();
-      updateNotes(newNote);
+      const note = newNote;
+      note.color = newNote.color === "random"
+                    ? colorArr[Math.floor(Math.random() * 4)].code
+                    : colorArr.find(obj => obj.name === newNote.color).code
+
+      updateNotes(note);
 
       setNewNote({
         title: "",
         note: "",
         created_by: "",
+        color: "random"
       });
     }
 
-    const noteForm = <NoteForm
-                        title={newNote.title}
-                        created_by={newNote.created_by}
-                        note={newNote.note}
-                        updateNewNote={updateNewNote}
-                        handleSubmit={handleSubmit}
-                      />
-    const noteComponents = notes.map(noteData => (<Note {...noteData} deleteNote={deleteSelectedNote} id={noteData.key} />))
+    const noteComponents = notes.map(noteData => (
+      <Note
+        {...noteData}
+        deleteNote={deleteSelectedNote}
+        id={noteData.key}
+      />
+    ))
 
     return (
         <Container>
-            { showForm && 
-                <NoteForm
-                  title={newNote.title}
-                  created_by={newNote.created_by}
-                  created_at={newNote.created_at}
-                  note={newNote.note}
-                  updateNewNote={updateNewNote}
-                  handleSubmit={handleSubmit}
-                />
-            }
-            { notes.length > 0 ? noteComponents : <h1>No Items to Display</h1>}
+          <BackgroundImage 
+            src={backgroundImg}
+          />
+          { showForm && 
+            <NoteForm
+              title={newNote.title}
+              created_by={newNote.created_by}
+              created_at={newNote.created_at}
+              note={newNote.note}
+              updateNewNote={updateNewNote}
+              handleSubmit={handleSubmit}
+            />
+          }
+          { notes.length > 0 ? noteComponents : <NoNotesMessage>No Notes to Display</NoNotesMessage>}
         </Container>
     )
 }
@@ -74,7 +91,19 @@ function NotesContainer(props) {
 export default NotesContainer
 
 const Container = styled.main`
-  background-color: purple;
-  display: flex;
-  flex-direction: column;
+  height: 100%;
+`
+
+const BackgroundImage = styled.img`
+  // puts it behind all other elements
+  position: absolute;
+  z-index: -999;
+
+  // extends it to all edges of page
+  width: 100%;
+  height: 100%;
+`
+
+const NoNotesMessage = styled.h1`
+  align-self: center;
 `

@@ -38,7 +38,7 @@ Please see a **very basic** example here: [https://damonspencerroberts.github.io
 6. If there are no notes display ‘No notes yet’ message to the user. ✅
 7. There should be a way to sort the notes by date associated with the note.
 8. There should be a way to update a specific note.
-9. There should be a way to delete a specific note.
+9. There should be a way to delete a specific note. ✅
 
 ### Use Hooks
 
