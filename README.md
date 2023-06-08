@@ -69,7 +69,7 @@ npm start
 
 **Bonus:**
 
-- Colour randomiser for the note background
+- Colour randomiser for the note background ✅
     - When adding a note have a random background color.
 - Different validation schema
     - Only certain letters/numbers etc.
