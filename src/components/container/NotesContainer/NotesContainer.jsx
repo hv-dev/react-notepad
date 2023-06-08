@@ -21,11 +21,39 @@ function NotesContainer(props) {
       );
     }
 
+    function setNoteUpdateMode(key, update) {
+      setNotes(current =>
+        current.filter(note => {
+          if (note.key === key) {
+            note.edit = update;
+          }
+          return note;
+        }))
+    }
+
+    function updateNote(key, title, noteText, color) {
+      setNotes(current =>
+        current.filter(note => {
+          if (note.key === key) {
+            note = {
+              key: key,
+              title: title,
+              note: noteText,
+              created_by: note.created_by,
+              color: color,
+              update: false
+            }
+          }
+          return note;
+        }))
+    }
+
     const [newNote, setNewNote] = React.useState({
       title: "",
       note: "",
       created_by: "",
-      color: "random"
+      color: "random",
+      update: false
     })
 
     function updateNewNote(event) {
