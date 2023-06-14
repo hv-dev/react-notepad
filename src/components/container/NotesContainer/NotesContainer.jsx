@@ -5,7 +5,7 @@ import backgroundImg from "../../../assets/images/background.svg"
 
 function NotesContainer(props) {
     const { showForm } = props
-    const[notes, setNotes] = React.useState([])
+    const [notes, setNotes] = React.useState([])
 
     function updateNotes(newNote) {
       const d = new Date();
@@ -21,11 +21,11 @@ function NotesContainer(props) {
       );
     }
 
-    function setNoteUpdateMode(key, update) {
+    function setNoteToUpdate(key) {
       setNotes(current =>
         current.filter(note => {
           if (note.key === key) {
-            note.edit = update;
+            note.update = true;
           }
           return note;
         }))
@@ -45,15 +45,17 @@ function NotesContainer(props) {
             }
           }
           return note;
-        }))
+        })
+      )
     }
 
     const [newNote, setNewNote] = React.useState({
       title: "",
       note: "",
       created_by: "",
-      color: "random",
-      update: false
+      color: "#fefbc0",
+      random: false,
+      update: false,
     })
 
     function updateNewNote(event) {
@@ -64,19 +66,12 @@ function NotesContainer(props) {
       }))
     }
 
-    const colorArr = [
-      { name: "green", code: "RGB(202,237,157)"},
-      { name: "orange", code: "RGB(248,163,43)"},
-      { name: "pink", code: "RGB(252,195,201)"},
-      { name: "purple", code: "RGB(220,136,221)"}
-    ]
-
     function handleSubmit(event) {
       event.preventDefault();
       const note = newNote;
-      note.color = newNote.color === "random"
-                    ? colorArr[Math.floor(Math.random() * 4)].code
-                    : colorArr.find(obj => obj.name === newNote.color).code
+      note.color = newNote.random
+                    ? `#${Math.random().toString(16).substring(0, 5)}`
+                    : note.color
 
       updateNotes(note);
 
@@ -84,14 +79,13 @@ function NotesContainer(props) {
         title: "",
         note: "",
         created_by: "",
-        color: "random"
+        color: "#fefbc0"
       });
     }
 
     const noteComponents = notes.map(noteData => (
       <Note
         {...noteData}
-        deleteNote={deleteSelectedNote}
         id={noteData.key}
       />
     ))
@@ -107,6 +101,7 @@ function NotesContainer(props) {
               created_by={newNote.created_by}
               created_at={newNote.created_at}
               note={newNote.note}
+              color={newNote.color}
               updateNewNote={updateNewNote}
               handleSubmit={handleSubmit}
             />

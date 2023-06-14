@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 function NoteForm(props) {
-  const { title, created_by, note, updateNewNote, handleSubmit} = props
+  const { title, created_by, note, color, updateNewNote, handleSubmit } = props
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -34,7 +34,14 @@ function NoteForm(props) {
         rows={15}
         required
       />
-      <SubmitButton >Add To Notes</SubmitButton>
+      <h3>Note Colour</h3>
+      <input
+        type="color"
+        name="color"
+        value={color}
+        onChange={updateNewNote}
+      />
+      <SubmitButton>Add To Notes</SubmitButton>
     </Form>
   )
 }
@@ -42,7 +49,7 @@ function NoteForm(props) {
 export default NoteForm
 
 const Form = styled.form`
-  background-color: red;
+  background-color: lightblue;
   display: flex;
   flex-direction: column;
   padding 18px 48px;

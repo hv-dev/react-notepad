@@ -3,26 +3,18 @@ import styled from "styled-components"
 import PropTypes from 'prop-types';
 
 function Note(props) {
-    const { id, title, note, created_by, created_at, deleteNote, color } = props
-
-    // const colorArr = [
-    //     { name: "green", code: "RGB(202,237,157)"},
-    //     { name: "orange", code: "RGB(248,163,43)"},
-    //     { name: "pink", code: "RGB(252,195,201)"},
-    //     { name: "purple", code: "RGB(220,136,221)"}
-    // ]
-
-    // const noteColor = color === null
-    //     ? colorArr[Math.floor(Math.random() * colorArr.length)].code
-    //     : colorArr.find(obj => obj.name === color).code
+    const { id, title, note, created_by, created_at, deleteNote, color, updateNote } = props
 
     return (
-        <NoteMain color={color}>
-            <NoteTitle>{title}</NoteTitle>
-            <DeleteButton onClick={() => deleteNote(id)}>Delete</DeleteButton>
-            <NoteDetails>Author: {created_by} on {created_at}</NoteDetails>
-            <NoteText>{note}</NoteText>
-        </NoteMain>
+      <NoteMain color={color}>
+        <div>
+          <NoteTitle>{title}</NoteTitle>
+          <UpdateButton onClick={() => updateNote(id)}>Edit</UpdateButton>
+          <DeleteButton onClick={() => deleteNote(id)}>Delete</DeleteButton>
+          <NoteDetails>Author: {created_by} on {created_at}</NoteDetails>
+          <NoteText>{note}</NoteText>
+        </div>
+      </NoteMain>
     )
 }
 
@@ -30,7 +22,15 @@ export default Note
 
 const NoteMain = styled.div`
     background: ${(props) => props.color};
+    width: 800px;
     margin: 20px 20px;
+    min-height: 150px;
+    padding: 16px;
+    border: 1px solid #d8d8d8;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: "Helvetica", "Arial", sans-serif;
+    position: relative;
 `
 
 const NoteTitle = styled.h1`
@@ -43,6 +43,11 @@ const DeleteButton = styled.button`
     position: absolute;
     height: 38px;
     margin: 10px 0px;
+`
+
+const UpdateButton = styled.button`
+  height: 32px;
+  width: 32px;
 `
 
 const NoteDetails = styled.h2`
@@ -60,9 +65,6 @@ Note.propTypes = {
     created_by: PropTypes.string.isRequired,
     created_at: PropTypes.string.isRequired,
     deleteNote: PropTypes.func.isRequired,
-    color: PropTypes.string
+    color: PropTypes.string.isRequired,
+    updateNote: PropTypes.func.isRequired
 }
-
-Note.defaultProps = {
-    color: null
-};
