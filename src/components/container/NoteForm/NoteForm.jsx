@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import PropTypes from 'prop-types';
 import styled from "styled-components"
 import { v4 as uuidv4 } from "uuid"
 
@@ -79,7 +80,6 @@ function NoteForm(props) {
   return (
     <Form onSubmit={handleSubmit}>
       <h2>{isUpdating ? `Editing Note ${updatingNote.title} by ${updatingNote.author}` : "Create a New Note"}</h2>
-      <label htmlFor="title">Title</label>
       <input 
         id="title"
         type="text"
@@ -90,7 +90,6 @@ function NoteForm(props) {
         onChange={handleFormChange}
         required
       />
-      <label htmlFor="author">Author</label>
       <input
         id="author"
         type="text"
@@ -101,7 +100,6 @@ function NoteForm(props) {
         onChange={handleFormChange}
         required
       />
-      <label htmlFor="note">Note</label>
       <textarea
         id="note"
         placeholder="Note"
@@ -133,26 +131,36 @@ function NoteForm(props) {
   )
 }
 
-export default NoteForm
-
 const Form = styled.form`
-  background-color: lightblue;
-  display: flex;
-  flex-direction: column;
-  padding 18px 48px;
+background-color: lightblue;
+display: flex;
+flex-direction: column;
+padding 18px 48px;
 
-  .form--input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
+.form--input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 `
 const SubmitButton = styled.button`
-  height: 48px;
-  margin-top: 12px;
-  border-radius: 16px;
+height: 48px;
+margin-top: 12px;
+border-radius: 16px;
 `
+
+NoteForm.propTypes = {
+  formSubmit: PropTypes.func.isRequired,
+  formUpdate: PropTypes.func.isRequired,
+  updatingNote: PropTypes.object
+}
+
+NoteForm.defaultProps = {
+  updatingNote: null
+}
+
+export default NoteForm

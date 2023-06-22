@@ -1,4 +1,3 @@
-// import './App.css';
 import { useState } from "react"
 import {Header, NotesContainer} from "./components"
 import styled from "styled-components"
@@ -21,8 +20,8 @@ function App() {
         formVisible={formVisible}
       />
       <NotesContainer
-        formToggle={toggleNoteForm}
         formVisible={formVisible}
+        formToggle={toggleNoteForm}
       />
     </AppContainer>
   );

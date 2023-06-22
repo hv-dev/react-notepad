@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from 'prop-types';
 import styled from "styled-components"
 import { NoteForm, Note } from "../../"
 
@@ -63,3 +64,8 @@ const Container = styled.main`
 const NoNotesMessage = styled.h1`
   align-self: center;
 `
+
+NotesContainer.propTypes = {
+  formVisible: PropTypes.bool.isRequired,
+  formToggle: PropTypes.func.isRequired
+}

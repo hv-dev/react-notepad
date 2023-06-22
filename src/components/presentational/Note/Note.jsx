@@ -13,7 +13,7 @@ function Note(props) {
     return (
       <NoteMain color={color}>
         <NoteTitle>{title}</NoteTitle>
-        <UpdateButton onClick={() => updateNote({id, title, author, date, note, color})}>Edit</UpdateButton>
+        <UpdateButton variant="contained" onClick={() => updateNote({id, title, author, date, note, color})}>Edit</UpdateButton>
         <DeleteButton onClick={() => deleteNote(id)}>Delete</DeleteButton>
         <NoteDetails>Author: {author} on {generateDateString()}</NoteDetails>
         <NoteText>{note}</NoteText>
@@ -24,8 +24,8 @@ function Note(props) {
 export default Note
 
 const NoteMain = styled.div`
-    width: 400px;
-    min-height: 150px;
+    width: 600px;
+    min-height: 180px;
     padding: 16px;
     margin: 16px;
     background-color: ${(props) => props.color};
