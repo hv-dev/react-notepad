@@ -3,17 +3,20 @@ import styled from "styled-components"
 import PropTypes from 'prop-types';
 
 function Note(props) {
-    const { id, title, note, created_by, created_at, deleteNote, color, updateNote } = props
+    const { id, title, note, author, date, color, updateNote, deleteNote } = props
+
+    const generateDateString = () => {
+      const d = new Date(date);
+      return `${d.toLocaleDateString()} at ${d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+    }
 
     return (
       <NoteMain color={color}>
-        <div>
-          <NoteTitle>{title}</NoteTitle>
-          <UpdateButton onClick={() => updateNote(id)}>Edit</UpdateButton>
-          <DeleteButton onClick={() => deleteNote(id)}>Delete</DeleteButton>
-          <NoteDetails>Author: {created_by} on {created_at}</NoteDetails>
-          <NoteText>{note}</NoteText>
-        </div>
+        <NoteTitle>{title}</NoteTitle>
+        <UpdateButton onClick={() => updateNote({id, title, author, date, note, color})}>Edit</UpdateButton>
+        <DeleteButton onClick={() => deleteNote(id)}>Delete</DeleteButton>
+        <NoteDetails>Author: {author} on {generateDateString()}</NoteDetails>
+        <NoteText>{note}</NoteText>
       </NoteMain>
     )
 }
@@ -21,11 +24,11 @@ function Note(props) {
 export default Note
 
 const NoteMain = styled.div`
-    background: ${(props) => props.color};
-    width: 800px;
-    margin: 20px 20px;
+    width: 400px;
     min-height: 150px;
     padding: 16px;
+    margin: 16px;
+    background-color: ${(props) => props.color};
     border: 1px solid #d8d8d8;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -34,9 +37,9 @@ const NoteMain = styled.div`
 `
 
 const NoteTitle = styled.h1`
-    display: inline-block;
-    margin: 10px;
-    width: 96%;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
 `
 
 const DeleteButton = styled.button`
@@ -51,20 +54,23 @@ const UpdateButton = styled.button`
 `
 
 const NoteDetails = styled.h2`
-    margin: 10px;
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 8px;
 `
 
 const NoteText = styled.p`
-    margin-left: 10px;
+  font-size: 14px;
+  word-wrap: break-word;
 `
 
 Note.propTypes = {
-    id: PropTypes.number,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     note: PropTypes.string.isRequired,
-    created_by: PropTypes.string.isRequired,
-    created_at: PropTypes.string.isRequired,
-    deleteNote: PropTypes.func.isRequired,
+    author: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
     color: PropTypes.string.isRequired,
-    updateNote: PropTypes.func.isRequired
+    updateNote: PropTypes.func.isRequired,
+    deleteNote: PropTypes.func.isRequired
 }

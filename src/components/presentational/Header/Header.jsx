@@ -2,13 +2,13 @@ import React from "react"
 import styled from "styled-components"
 
 function Header(props) {
-  const {titleText, link, imgSrc, imgAlt, formToggle, showForm} = props
+  const {titleText, link, imgSrc, imgAlt, formToggle, formVisible} = props
 
   return (
     <StyledHeader>
       <img src={imgSrc} alt={imgAlt} />
       <Title>{titleText}</Title>
-      <FormToggle onClick={formToggle}>{showForm ? "Hide Form" : "Show Form"}</FormToggle>
+      <FormToggle onClick={() => formToggle(!formVisible)}>{formVisible ? "Hide Form" : "Show Form"}</FormToggle>
       <Link href={link.url}>{link.text}</Link>
     </StyledHeader>
   )

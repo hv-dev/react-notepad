@@ -1,45 +1,132 @@
-import React from "react"
+import { useState, useEffect } from "react"
 import styled from "styled-components"
+import { v4 as uuidv4 } from "uuid"
 
 function NoteForm(props) {
-  const { title, created_by, note, color, updateNewNote, handleSubmit } = props
+  const { formSubmit, formUpdate, updatingNote } = props
+  const [formData, setFormData] = useState({
+    title: "",
+    note: "",
+    author: "",
+    color: "#fefbc0",
+    random: false,
+  })
+  const [isUpdating, setIsUpdating] = useState(false)
+
+  function handleFormChange(event) {
+    const { name, value } = event.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    let color;
+    if (formData.random) {
+      color = `#${uuidv4().toString().substring(0,4)}`;
+    } else {
+      color = formData.color;
+    }
+    console.log(color);
+    if (isUpdating) {
+      formUpdate({
+        id: formData.id,
+        title: formData.title,
+        author: formData.author,
+        note: formData.note,
+        date: formData.date,
+        color: color
+      });
+    } else {
+      const noteUUID = uuidv4().toString();
+      formSubmit({
+        id: noteUUID,
+        title: formData.title,
+        author: formData.author,
+        note: formData.note,
+        date: Date.now(),
+        color: color
+      });
+    }
+    setFormData({
+      id: null,
+      title: "",
+      author: "",
+      note: "",
+      color: "#fefac0",
+      random: false
+    });
+    setIsUpdating(false);
+  }
+
+  useEffect(() => {
+    if (updatingNote) {
+      setFormData({
+        id: updatingNote.id,
+        title: updatingNote.title,
+        author: updatingNote.author,
+        date: updatingNote.date,
+        note: updatingNote.note,
+        color: updatingNote.color,
+        random: false
+      });
+      setIsUpdating(true);
+    }
+  }, [updatingNote]);
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2>New Note</h2>
+      <h2>{isUpdating ? `Editing Note ${updatingNote.title} by ${updatingNote.author}` : "Create a New Note"}</h2>
+      <label htmlFor="title">Title</label>
       <input 
+        id="title"
         type="text"
         placeholder="Title"
         className="form--input"
-        value={title}
+        value={formData.title}
         name="title"
-        onChange={updateNewNote}
+        onChange={handleFormChange}
         required
       />
-      <input 
+      <label htmlFor="author">Author</label>
+      <input
+        id="author"
         type="text"
-        placeholder="Noted by"
+        placeholder="Author"
         className="form--input"
-        value={created_by}
-        name="created_by"
-        onChange={updateNewNote}
+        value={formData.author}
+        name="author"
+        onChange={handleFormChange}
         required
       />
+      <label htmlFor="note">Note</label>
       <textarea
+        id="note"
         placeholder="Note"
         className="form--input"
-        value={note}
+        value={formData.note}
         name="note"
-        onChange={updateNewNote}
+        onChange={handleFormChange}
         rows={15}
         required
       />
-      <h3>Note Colour</h3>
+      <label htmlFor="color">Note Colour</label>
       <input
+        id="color"
         type="color"
         name="color"
-        value={color}
-        onChange={updateNewNote}
+        value={formData.color}
+        onChange={handleFormChange}
+      />
+      <label htmlFor="random">Random Colour?</label>
+      <input
+        id="random"
+        type="checkbox"
+        name="random"
+        checked={formData.random}
+        onChange={handleFormChange}
       />
       <SubmitButton>Add To Notes</SubmitButton>
     </Form>

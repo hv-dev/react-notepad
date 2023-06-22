@@ -6,12 +6,10 @@ import Header from "./presentational/Header"
 import NotesContainer from "./container/NotesContainer"
 import NoteForm from "./container/NoteForm"
 import Note from "./presentational/Note"
-// import Footer from "./presentational/Footer"
 
 export {
   Header,
   NotesContainer,
   NoteForm,
   Note
-  // Footer,
 };

@@ -5,10 +5,10 @@ import styled from "styled-components"
 import headerImg from './assets/images/maxwell-the-cat-maxwell.gif';
 
 function App() {
-  const [showForm, toggleForm] = useState(true);
+  const [formVisible, toggleForm] = useState(true);
 
-  function toggleNoteForm() {
-    toggleForm(oldValue => !oldValue)
+  function toggleNoteForm(newVal) {
+    toggleForm(newVal);
   }
 
   return (
@@ -18,10 +18,11 @@ function App() {
         link={{ url: "https://www.github.com/hv-dev", text: "Other Projects" }}
         imgSrc={headerImg}
         formToggle={toggleNoteForm}
-        showForm={showForm}
+        formVisible={formVisible}
       />
       <NotesContainer
-        showForm={showForm}
+        formToggle={toggleNoteForm}
+        formVisible={formVisible}
       />
     </AppContainer>
   );
