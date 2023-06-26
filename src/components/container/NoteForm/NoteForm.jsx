@@ -10,7 +10,7 @@ function NoteForm(props) {
     note: "",
     author: "",
     color: "#fefbc0",
-    random: false,
+    random: true,
   })
   const [isUpdating, setIsUpdating] = useState(false)
 
@@ -30,7 +30,7 @@ function NoteForm(props) {
     } else {
       color = formData.color;
     }
-    console.log(color);
+
     if (isUpdating) {
       formUpdate({
         id: formData.id,
@@ -57,7 +57,7 @@ function NoteForm(props) {
       author: "",
       note: "",
       color: "#fefac0",
-      random: false
+      random: true
     });
     setIsUpdating(false);
   }
@@ -79,53 +79,70 @@ function NoteForm(props) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2>{isUpdating ? `Editing Note ${updatingNote.title} by ${updatingNote.author}` : "Create a New Note"}</h2>
-      <input 
-        id="title"
-        type="text"
-        placeholder="Title"
-        className="form--input"
-        value={formData.title}
-        name="title"
-        onChange={handleFormChange}
-        required
-      />
-      <input
-        id="author"
-        type="text"
-        placeholder="Author"
-        className="form--input"
-        value={formData.author}
-        name="author"
-        onChange={handleFormChange}
-        required
-      />
-      <textarea
-        id="note"
-        placeholder="Note"
-        className="form--input"
-        value={formData.note}
-        name="note"
-        onChange={handleFormChange}
-        rows={15}
-        required
-      />
-      <label htmlFor="color">Note Colour</label>
-      <input
-        id="color"
-        type="color"
-        name="color"
-        value={formData.color}
-        onChange={handleFormChange}
-      />
-      <label htmlFor="random">Random Colour?</label>
-      <input
-        id="random"
-        type="checkbox"
-        name="random"
-        checked={formData.random}
-        onChange={handleFormChange}
-      />
+      <InputsContainer>
+      <LeftContainer>
+        <FormTitle>{isUpdating ? `Editing Note ${updatingNote.title} by ${updatingNote.author}` : "Create a New Note"}</FormTitle>
+        <InputContainer direction="column">
+          {/* <label htmlFor="title">Title</label> */}
+          <input 
+            id="title"
+            type="text"
+            placeholder="Title"
+            className="form--input"
+            value={formData.title}
+            name="title"
+            onChange={handleFormChange}
+            required
+          />
+        </InputContainer>
+        <InputContainer direction="column">
+          {/* <label htmlFor="author">Author</label> */}
+          <input
+            id="author"
+            type="text"
+            placeholder="Author"
+            className="form--input"
+            value={formData.author}
+            name="author"
+            onChange={handleFormChange}
+            required
+          />
+        </InputContainer>
+        <InputContainer direction="row">
+          <label htmlFor="color">Colour</label>
+          <input
+            id="color"
+            type="color"
+            name="color"
+            value={formData.color}
+            onChange={handleFormChange}
+          />
+        </InputContainer>
+        <InputContainer direction="row">
+          <label htmlFor="random">Random Colour?</label>
+          <input
+            id="random"
+            type="checkbox"
+            name="random"
+            checked={formData.random}
+            onChange={handleFormChange}
+          />
+        </InputContainer>
+      </LeftContainer>
+      <RightContainer>
+        <textarea
+          id="note"
+          placeholder="Note"
+          className="form--input"
+          value={formData.note}
+          name="note"
+          onChange={handleFormChange}
+          rows={12}
+          required
+          style={{marginTop: 60 + "px"}}
+        />
+      </RightContainer>
+      </InputsContainer>
       <SubmitButton>Add To Notes</SubmitButton>
     </Form>
   )
@@ -134,8 +151,10 @@ function NoteForm(props) {
 const Form = styled.form`
 background-color: lightblue;
 display: flex;
+padding: 18px 48px;
+display: flex;
 flex-direction: column;
-padding 18px 48px;
+align-items: center;
 
 .form--input {
   width: 100%;
@@ -147,11 +166,41 @@ padding 18px 48px;
   box-sizing: border-box;
 }
 `
-const SubmitButton = styled.button`
-height: 48px;
-margin-top: 12px;
-border-radius: 16px;
+const FormTitle = styled.h2`
+  padding-bottom: 0px;
+  margin-bottom: 8px;
 `
+const InputsContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const LeftContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+`
+
+const RightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 24px;
+`
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: ${(props) => props.direction};
+  margin-right: 6px;
+  margin-bottom: 6px;
+`;
+
+const SubmitButton = styled.button`
+  height: 60px;
+  width: 100%;
+  border-radius: 16px;
+  font-size: 18px;
+`;
 
 NoteForm.propTypes = {
   formSubmit: PropTypes.func.isRequired,
@@ -163,4 +212,4 @@ NoteForm.defaultProps = {
   updatingNote: null
 }
 
-export default NoteForm
+export default NoteForm;

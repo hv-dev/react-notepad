@@ -6,7 +6,7 @@ function Header(props) {
 
   return (
     <StyledHeader>
-      <img src={imgSrc} alt={imgAlt} />
+      <HeaderImg href="https://youtu.be/NY0ffyEu6uo"><img src={imgSrc} alt={imgAlt} /></HeaderImg>
       <Title>{titleText}</Title>
       <FormToggle onClick={() => formToggle(!formVisible)}>{formVisible ? "Hide Form" : "Show Form"}</FormToggle>
       <Link href={link.url}>{link.text}</Link>
@@ -38,6 +38,11 @@ const FormToggle = styled.h3`
   border-style: solid;
   border-radius: 5px;
   border-color: white;
+`
+
+const HeaderImg = styled.a`
+  height: 80%;
+  margin-right: 0.5%;
 `
 
 const Link = styled.a`

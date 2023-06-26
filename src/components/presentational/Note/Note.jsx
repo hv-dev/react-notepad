@@ -13,8 +13,8 @@ function Note(props) {
     return (
       <NoteMain color={color}>
         <NoteTitle>{title}</NoteTitle>
-        <UpdateButton variant="contained" onClick={() => updateNote({id, title, author, date, note, color})}>Edit</UpdateButton>
-        <DeleteButton onClick={() => deleteNote(id)}>Delete</DeleteButton>
+        <ActionButton positionRight={70} onClick={() => updateNote({id, title, author, date, note, color})}>Edit</ActionButton>
+        <ActionButton positionRight={10} onClick={() => deleteNote(id)}>Delete</ActionButton>
         <NoteDetails>Author: {author} on {generateDateString()}</NoteDetails>
         <NoteText>{note}</NoteText>
       </NoteMain>
@@ -24,7 +24,7 @@ function Note(props) {
 export default Note
 
 const NoteMain = styled.div`
-    width: 600px;
+    width: 512px;
     min-height: 180px;
     padding: 16px;
     margin: 16px;
@@ -39,14 +39,21 @@ const NoteMain = styled.div`
 const NoteTitle = styled.h1`
   font-weight: bold;
   font-size: 16px;
+  margin-top: 0;
   margin-bottom: 8px;
 `
 
-const DeleteButton = styled.button`
-    position: absolute;
-    height: 38px;
-    margin: 10px 0px;
-`
+const ActionButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: ${({ positionRight }) => `${positionRight}px`};
+  background: white;
+  color: black;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 15%;
+  cursor: pointer;
+`;
 
 const UpdateButton = styled.button`
   height: 32px;

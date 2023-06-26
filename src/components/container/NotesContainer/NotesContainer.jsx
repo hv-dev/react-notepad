@@ -50,7 +50,9 @@ function NotesContainer(props) {
               updatingNote={updatingNote}
             />
           }
-          { notes.length > 0 ? noteComponents : <NoNotesMessage>No Notes to Display</NoNotesMessage>}
+          <NotesGrid>
+            { notes.length > 0 ? noteComponents : <NoNotesMessage>No Notes to Display</NoNotesMessage>}
+          </NotesGrid>
         </Container>
     )
 }
@@ -59,6 +61,14 @@ export default NotesContainer
 
 const Container = styled.main`
   height: 100%;
+`
+
+const NotesGrid = styled.div`
+  display: grid;
+  column-gap: 20px;
+  row-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding-left: 24px;
 `
 
 const NoNotesMessage = styled.h1`
